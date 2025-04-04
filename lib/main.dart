@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:work_guard/core/routes.dart';
+import 'package:work_guard/core/utils/app_colors.dart';
 
 void main() {
-  runApp(const workGuard());
+  runApp(const WorkGuardApp());
 }
 
-class workGuard extends StatelessWidget {
-  const workGuard({super.key});
+class WorkGuardApp extends StatelessWidget {
+  const WorkGuardApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData(), home: Container());
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+      ),
+      routerConfig: AppRouter.createRouter(),
+    );
   }
 }
