@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work_guard/core/utils/app_colors.dart';
-import 'package:work_guard/features/on_boarding/presentation/widgets/action_button.dart';
-import 'package:work_guard/features/on_boarding/presentation/widgets/page_indicators.dart';
+import 'package:work_guard/features/on_boarding/presentation/views/widgets/action_button.dart';
+import 'package:work_guard/features/on_boarding/presentation/views/widgets/page_indicators.dart';
 
 class ContentCard extends StatelessWidget {
   final double screenWidth;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work_guard/features/on_boarding/data/models/onboarding_item.dart';
-import 'package:work_guard/features/on_boarding/presentation/widgets/background_image.dart';
-import 'package:work_guard/features/on_boarding/presentation/widgets/content_card.dart';
+import 'package:work_guard/features/on_boarding/presentation/views/widgets/background_image.dart';
+import 'package:work_guard/features/on_boarding/presentation/views/widgets/content_card.dart';
 
 class OnboardingSlide extends StatelessWidget {
   final OnboardingItem item;

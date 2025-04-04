@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:work_guard/core/routes.dart';
 import 'package:work_guard/core/utils/app_assets.dart';
 import 'package:work_guard/features/on_boarding/data/models/onboarding_item.dart';
-import 'package:work_guard/features/on_boarding/presentation/widgets/onboarding_page.dart';
+import 'package:work_guard/features/on_boarding/presentation/views/widgets/onboarding_page.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -60,12 +62,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   void _completeOnboarding() {
-    // Navigate to the main app or login screen
-    // Example:
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => HomeScreen()),
-    // );
+    GoRouter.of(context).push(AppRouter.kLogInView);
   }
 
   @override
