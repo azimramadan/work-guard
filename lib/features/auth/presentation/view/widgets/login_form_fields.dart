@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:work_guard/core/routes.dart';
 import 'package:work_guard/core/validation/validators.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/custom_text_form_field.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/forgot_password_link_text.dart';
@@ -29,7 +31,7 @@ class _LoginFormFieldsState extends State<LoginFormFields> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Logging in...')));
-      // Add your login logic here
+      GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
     }
   }
 

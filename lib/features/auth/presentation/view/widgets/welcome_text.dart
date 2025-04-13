@@ -15,9 +15,9 @@ class WelcomeText extends StatelessWidget {
           color: Colors.black,
         ),
         children: [
-          TextSpan(text: 'Welcome Back 👋\nto '),
+          TextSpan(text: 'Hey there! Welcome 👋\nto '),
           TextSpan(
-            text: 'HR Attendee',
+            text: 'Work Guard',
             style: TextStyle(color: AppColors.primaryColor),
           ),
         ],

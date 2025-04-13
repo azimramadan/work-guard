@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work_guard/core/utils/app_colors.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     required this.controller,
@@ -19,33 +19,45 @@ class CustomTextFormField extends StatelessWidget {
   final bool isPassword;
   final bool obscureText;
   final VoidCallback? toggleVisibility;
+
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool hasError = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(minHeight: 56),
       child: TextFormField(
         cursorColor: const Color.fromARGB(255, 110, 112, 114),
-        controller: controller,
+        controller: widget.controller,
         keyboardType:
-            label.toLowerCase().contains('email')
+            widget.label.toLowerCase().contains('email')
                 ? TextInputType.emailAddress
                 : null,
-        obscureText: isPassword ? obscureText : false,
-        validator: validator,
+        obscureText: widget.isPassword ? widget.obscureText : false,
+        validator: (value) {
+          final error = widget.validator(value);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            setState(() {
+              hasError = error != null;
+            });
+          });
+          return error;
+        },
 
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(
             vertical: 16.0,
             horizontal: 16.0,
           ),
-          labelText: label,
-          hintText: hint,
+          labelText: widget.label,
+          hintText: widget.hint,
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           floatingLabelStyle: TextStyle(
-            color:
-                validator(controller.text) != null
-                    ? Colors.redAccent
-                    : AppColors.primaryColor,
+            color: hasError ? Colors.redAccent : AppColors.primaryColor,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -73,14 +85,14 @@ class CustomTextFormField extends StatelessWidget {
           fillColor: Colors.transparent,
 
           suffixIcon:
-              isPassword
+              widget.isPassword
                   ? IconButton(
                     icon: Icon(
-                      obscureText
+                      widget.obscureText
                           ? Icons.visibility_off_outlined
                           : Icons.visibility_outlined,
                     ),
-                    onPressed: toggleVisibility,
+                    onPressed: widget.toggleVisibility,
                   )
                   : null,
         ),
