@@ -10,7 +10,7 @@ abstract class AppRouter {
   static final kHomeView = '/HomeView';
   static GoRouter createRouter() {
     return GoRouter(
-      initialLocation: kOnboardingView,
+      initialLocation: kHomeView,
       routes: [
         GoRoute(
           path: kOnboardingView,
