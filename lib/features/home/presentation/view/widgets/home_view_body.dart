@@ -15,7 +15,7 @@ class HomeViewBody extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
             child: ProfileHeader(),
           ),
         ),
