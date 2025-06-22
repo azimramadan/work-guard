@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:work_guard/core/utils/app_colors.dart';
+import 'package:work_guard/core/utils/styles/app_colors.dart';
 import 'package:work_guard/features/leaves/presentation/view/widgets/leave_status_card.dart';
 
 class LeavesOverviewGrid extends StatelessWidget {

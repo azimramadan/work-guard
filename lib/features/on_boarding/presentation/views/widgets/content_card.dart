@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:work_guard/core/utils/app_colors.dart';
+import 'package:work_guard/core/utils/styles/app_colors.dart';
 import 'package:work_guard/features/on_boarding/presentation/views/widgets/page_indicators.dart';
 
 class ContentCard extends StatelessWidget {
@@ -34,13 +34,13 @@ class ContentCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 25),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             PageIndicators(currentPage: currentPage, totalPages: totalPages),
-            const SizedBox(height: 20),
-            contentWidget,
-            const Spacer(),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            Expanded(child: contentWidget),
+
             _buildButton(),
-            const SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025),
           ],
         ),
       ),

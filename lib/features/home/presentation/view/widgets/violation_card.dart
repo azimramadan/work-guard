@@ -6,6 +6,7 @@ class ViolationCard extends StatelessWidget {
   final String description;
   final String date;
   final String severity;
+  final String deductions;
 
   const ViolationCard({
     super.key,
@@ -13,6 +14,7 @@ class ViolationCard extends StatelessWidget {
     required this.description,
     required this.date,
     required this.severity,
+    required this.deductions,
   });
 
   Color _getSeverityColor() {
@@ -70,6 +72,15 @@ class ViolationCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: screenWidth * 0.045,
                         fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      '-$deductions EGP',
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.045,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFEF5350),
                       ),
                     ),
                   ],

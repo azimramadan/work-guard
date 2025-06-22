@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
+import 'package:work_guard/core/data/models/user_local_model.dart';
+import 'package:work_guard/core/helper/hive_helper.dart';
+import 'package:work_guard/core/routes.dart';
+import 'package:work_guard/core/utils/constants/app_assets.dart';
 import 'package:work_guard/features/home/presentation/view/widgets/notification_badge.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -18,8 +24,29 @@ class ProfileHeader extends StatelessWidget {
   }
 }
 
-class UserInfo extends StatelessWidget {
+class UserInfo extends StatefulWidget {
   const UserInfo({super.key});
+
+  @override
+  State<UserInfo> createState() => _UserInfoState();
+}
+
+class _UserInfoState extends State<UserInfo> {
+  late final UserLocalModel? localUser;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocalUser();
+  }
+
+  Future<void> _loadLocalUser() async {
+    final user = await HiveHelper.getUser();
+    setState(() {
+      localUser = user;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -27,14 +54,14 @@ class UserInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Michael Mitc',
+          localUser?.name ?? 'loading...',
           style: TextStyle(
             fontSize: screenWidth * .06,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          'Lead UI/UX Designer',
+          localUser?.position ?? 'loading...',
           style: TextStyle(fontSize: screenWidth * .04, color: Colors.grey),
         ),
       ],
@@ -49,11 +76,16 @@ class ImageAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.go(AppRouter.kProfileView);
+      },
       child: CircleAvatar(
         backgroundColor: Colors.white,
         radius: screenWidth * .07,
-        backgroundImage: const AssetImage('assets/images/avatar.jpg'),
+        child: Lottie.asset(
+          AppAssets.animationProfileImage,
+          repeat: false,
+        ), //const AssetImage('assets/images/avatar.jpg'),
       ),
     );
   }

@@ -9,4 +9,9 @@ class AppAssets {
   static const String logoutIcon = 'assets/images/logout.png';
   static const String notificationIcon =
       'assets/images/notification_bing_icon.png';
+  static const String animationContact = 'assets/images/Animation_contact.json';
+  static const String animationProfileImage =
+      'assets/images/Animation_profile.json';
+  static const String animationSuccess = 'assets/images/Animation_success.json';
+  static const String animationLogo = 'assets/images/Animation_logo.json';
 }

@@ -14,6 +14,7 @@ class ViolationList extends StatelessWidget {
           description: violation['description']!,
           date: violation['date']!,
           severity: violation['severity']!,
+          deductions: '20',
         );
       }, childCount: violations.length),
     );

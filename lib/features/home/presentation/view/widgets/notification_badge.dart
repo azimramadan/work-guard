@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as badges;
-import 'package:work_guard/core/utils/app_assets.dart';
+import 'package:work_guard/core/utils/constants/app_assets.dart';
 
 class NotificationBadge extends StatelessWidget {
   const NotificationBadge({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:work_guard/core/routes.dart';
-import 'package:work_guard/core/utils/app_assets.dart';
+import 'package:work_guard/core/utils/constants/app_assets.dart';
 import 'package:work_guard/features/on_boarding/data/models/onboarding_item.dart';
 import 'package:work_guard/features/on_boarding/presentation/views/widgets/background_image.dart';
 import 'package:work_guard/features/on_boarding/presentation/views/widgets/content_card.dart';
@@ -20,7 +20,7 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody>
     OnboardingItem(
       title: 'our Daily Work Summary is Ready! 🕒',
       description:
-          'View your check-in and check-out times, actual working hours, recorded violations, and performance rating for the day—all in one place!',
+          "View your check-in and check-out times, working hours, violations, and performance rating for the day—all in one place!",
       mockupImage: AppAssets.onboarding_1,
     ),
     OnboardingItem(

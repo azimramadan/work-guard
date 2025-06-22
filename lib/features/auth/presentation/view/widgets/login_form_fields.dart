@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:work_guard/core/routes.dart';
 import 'package:work_guard/core/validation/validators.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/custom_text_form_field.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/forgot_password_link_text.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/login_button.dart';
+import 'package:work_guard/features/auth/presentation/view_model/cubit/auth_sign_in_cubit.dart';
 
 class LoginFormFields extends StatefulWidget {
   const LoginFormFields({super.key});
@@ -15,6 +17,7 @@ class LoginFormFields extends StatefulWidget {
 
 class _LoginFormFieldsState extends State<LoginFormFields> {
   bool _obscureText = true;
+  bool _shouldValidate = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -27,38 +30,52 @@ class _LoginFormFieldsState extends State<LoginFormFields> {
   }
 
   void _handleLogin() {
+    setState(() {
+      _shouldValidate = true;
+    });
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Logging in...')));
-      GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
+      BlocProvider.of<AuthSignInCubit>(context).signInUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        children: [
-          _buildEmailField(),
-          const SizedBox(height: 16),
-          _buildPasswordField(),
-          _buildForgotPasswordLinkText(),
-          const SizedBox(height: 20),
-          _buildLoginButton(),
-        ],
-      ),
+    return BlocConsumer<AuthSignInCubit, AuthSignInState>(
+      listener: (context, state) {
+        if (state is AuthSignInSuccess) {
+          context.go(AppRouter.kHomeView);
+        } else if (state is AuthSignInFailure) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.error)));
+        }
+      },
+      builder: (context, state) {
+        return Form(
+          key: _formKey,
+          autovalidateMode:
+              _shouldValidate
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
+          child: Column(
+            children: [
+              _buildEmailField(),
+              const SizedBox(height: 16),
+              _buildPasswordField(),
+              ForgotPasswordLinkText(),
+              const SizedBox(height: 20),
+              LoginButton(
+                loading: state is AuthSignInLoading,
+                handleLogin: _handleLogin,
+              ),
+            ],
+          ),
+        );
+      },
     );
-  }
-
-  Widget _buildForgotPasswordLinkText() {
-    return ForgotPasswordLinkText();
-  }
-
-  Widget _buildLoginButton() {
-    return LoginButton(handleLogin: _handleLogin);
   }
 
   Widget _buildEmailField() {

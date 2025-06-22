@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:work_guard/core/routes.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key, required this.title});
@@ -21,9 +23,7 @@ class CustomAppBar extends StatelessWidget {
           InkWell(
             borderRadius: BorderRadius.circular(8),
             onTap: () {
-              //////////////////////////////////////////////////////////////////////
-
-              //////////////////////////////////////////////////////////////////////
+              context.push(AppRouter.kApplyLeaveView);
             },
             child: Container(
               decoration: BoxDecoration(

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:work_guard/features/home/presentation/view/widgets/attendance_overview_grid.dart';
 import 'package:work_guard/features/home/presentation/view/widgets/month_calendar.dart';
 import 'package:work_guard/features/home/presentation/view/widgets/month_calendar_controller.dart';
 import 'package:work_guard/features/home/presentation/view/widgets/profile_header.dart';
 import 'package:work_guard/features/home/presentation/view/widgets/section_title.dart';
 import 'package:work_guard/features/home/presentation/view/widgets/violation_list.dart';
+import 'package:work_guard/features/home/presentation/view_model/cubit/attendance_cubit.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -22,6 +25,9 @@ class HomeViewBody extends StatelessWidget {
         SliverToBoxAdapter(
           child: MonthCalendarController(
             builder: (monthDays, selectedDayIndex, scrollController, onDayTap) {
+              BlocProvider.of<AttendanceCubit>(
+                context,
+              ).getAttendanceByDate(getSelectedDateFormatted(selectedDayIndex));
               return MonthCalendar(
                 monthDays: monthDays,
                 selectedDayIndex: selectedDayIndex,
@@ -47,5 +53,15 @@ class HomeViewBody extends StatelessWidget {
         ViolationList(),
       ],
     );
+  }
+
+  String getSelectedDateFormatted(int selectedDayIndex) {
+    final currentDate = DateTime.now();
+    final selectedDate = DateTime(
+      currentDate.year,
+      currentDate.month,
+      selectedDayIndex + 1,
+    );
+    return DateFormat('yyyy-MM-dd').format(selectedDate);
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:work_guard/core/routes.dart';
 import 'package:work_guard/features/leaves/data/models/leave_model.dart';
 import 'package:work_guard/features/leaves/presentation/view/widgets/apply_leave_controller.dart';
 import 'package:work_guard/features/leaves/presentation/view/widgets/apply_leave_form.dart';
@@ -63,7 +65,7 @@ class _ApplyLeaveViewBodyState extends State<ApplyLeaveViewBody> {
       builder: (_) {
         return SuccessBottomSheet(
           onDone: () {
-            Navigator.pop(context);
+            context.go(AppRouter.kLeavesView);
             setState(() {
               controller.resetForm();
             });

@@ -1,6 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:work_guard/core/utils/app_colors.dart';
+import 'package:work_guard/core/utils/styles/app_colors.dart';
 
 class DropdownField extends StatelessWidget {
   final String label;

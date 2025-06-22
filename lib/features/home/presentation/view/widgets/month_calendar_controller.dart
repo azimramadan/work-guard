@@ -95,7 +95,7 @@ class _MonthCalendarControllerState extends State<MonthCalendarController> {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('عذراً، يوم $dayName هو يوم إجازة'),
+        content: Text('Sorry, $dayName is a holiday.'),
         backgroundColor: Colors.red,
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
@@ -107,7 +107,7 @@ class _MonthCalendarControllerState extends State<MonthCalendarController> {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('عذراً، هذا اليوم لم يأتِ بعد'),
+        content: const Text('Sorry, that day hasn\'t come yet.'),
         backgroundColor: Colors.orange,
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),

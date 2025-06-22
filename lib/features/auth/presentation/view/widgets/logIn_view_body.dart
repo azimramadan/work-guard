@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:work_guard/core/utils/app_assets.dart';
-import 'package:work_guard/core/utils/app_colors.dart';
+import 'package:work_guard/core/utils/constants/app_assets.dart';
+import 'package:work_guard/core/utils/styles/app_colors.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/login_form_fields.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/register_link_text.dart';
 import 'package:work_guard/features/auth/presentation/view/widgets/welcome_text.dart';
@@ -23,40 +23,20 @@ class LogInViewBody extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildLogo(),
+        AspectRatio(aspectRatio: 2, child: Image.asset(AppAssets.logo)),
         const SizedBox(height: 25),
-        _buildWelcomeText(),
+        WelcomeText(),
         const SizedBox(height: 8),
-        _buildSubtitleText(),
+        const Text(
+          'Hello there, login to continue',
+          style: TextStyle(color: AppColors.silverGray, fontSize: 14),
+        ),
         const SizedBox(height: 30),
-        _buildLoginFormFields(),
+        LoginFormFields(),
         const SizedBox(height: 20),
-        _buildRegisterLinkText(),
+        RegisterLinkText(),
         const SizedBox(height: 20),
       ],
-    );
-  }
-
-  Widget _buildWelcomeText() {
-    return WelcomeText();
-  }
-
-  Widget _buildLoginFormFields() {
-    return LoginFormFields();
-  }
-
-  Widget _buildRegisterLinkText() {
-    return RegisterLinkText();
-  }
-
-  Widget _buildLogo() {
-    return AspectRatio(aspectRatio: 2, child: Image.asset(AppAssets.logo));
-  }
-
-  Widget _buildSubtitleText() {
-    return const Text(
-      'Hello there, login to continue',
-      style: TextStyle(color: AppColors.silverGray, fontSize: 14),
     );
   }
 }

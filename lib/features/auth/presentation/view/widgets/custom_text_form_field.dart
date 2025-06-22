@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:work_guard/core/utils/app_colors.dart';
+import 'package:work_guard/core/utils/styles/app_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -40,10 +40,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         obscureText: widget.isPassword ? widget.obscureText : false,
         validator: (value) {
           final error = widget.validator(value);
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            setState(() {
-              hasError = error != null;
-            });
+          Future.microtask(() {
+            if (mounted && hasError != (error != null)) {
+              setState(() {
+                hasError = error != null;
+              });
+            }
           });
           return error;
         },

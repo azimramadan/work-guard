@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:work_guard/core/utils/app_colors.dart';
+import 'package:work_guard/core/utils/styles/app_colors.dart';
 import 'package:work_guard/features/on_boarding/data/models/onboarding_item.dart';
 
 class OnboardingContent extends StatelessWidget {
@@ -7,10 +7,10 @@ class OnboardingContent extends StatelessWidget {
   final AnimationController animationController;
 
   const OnboardingContent({
-    Key? key,
+    super.key,
     required this.item,
     required this.animationController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,38 +29,48 @@ class OnboardingContent extends StatelessWidget {
 
     return Column(
       children: [
-        // Animated title
         FadeTransition(
           opacity: fadeAnimation,
           child: SlideTransition(
             position: slideAnimation,
-            child: Text(
-              item.title,
-              style: TextStyle(
-                fontSize: screenWidth * 0.065,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+            child: SizedBox(
+              width: double.infinity,
+              child: Text(
+                item.title,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.055,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
-              textAlign: TextAlign.center,
             ),
           ),
         ),
-        const SizedBox(height: 10),
-        // Animated description
+        Spacer(),
         FadeTransition(
           opacity: fadeAnimation,
           child: SlideTransition(
             position: slideAnimation,
-            child: Text(
-              item.description,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: screenWidth * 0.04,
-                color: AppColors.deepCharcoal,
+            child: Container(
+              width: double.infinity,
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.15,
+              ),
+              child: Text(
+                item.description,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.035,
+                  color: AppColors.deepCharcoal,
+                ),
               ),
             ),
           ),
         ),
+        Spacer(),
       ],
     );
   }

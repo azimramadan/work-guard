@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:work_guard/core/utils/app_colors.dart';
+import 'package:work_guard/core/utils/styles/app_colors.dart';
 
 class LoginButton extends StatelessWidget {
   final void Function() handleLogin;
-
-  const LoginButton({super.key, required this.handleLogin});
+  final bool loading;
+  const LoginButton({
+    super.key,
+    required this.handleLogin,
+    this.loading = false,
+  });
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,10 +24,13 @@ class LoginButton extends StatelessWidget {
           elevation: 0,
         ),
         onPressed: handleLogin,
-        child: const Text(
-          'Login',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-        ),
+        child:
+            loading
+                ? const CircularProgressIndicator()
+                : const Text(
+                  'Login',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
       ),
     );
   }
